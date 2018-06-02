@@ -11,9 +11,9 @@
   - [1. Aprovisionamiento básico de máquina virtual con Ubuntu 16.04.4 LTS (xenial)]()
   - [2. Instalación de LXC/LXD con permisos para el usuario]()
   - [3. Creación de contenedores con servicio web]()
-  - [4. Creación de contenedor con servicio de balanceo de carga()
-  - [5. Pruebas del funcionamiento del balanceador de carga()
-  - [6. Configuración para permitir el acceso desde el sistema anfitrión al contenedor con el servicio para balanceo de carga()
+  - [4. Creación de contenedor con servicio de balanceo de carga]()
+  - [5. Pruebas del funcionamiento del balanceador de carga]()
+  - [6. Configuración para permitir el acceso desde el sistema anfitrión al contenedor con el servicio para balanceo de carga]()
   - [7. Referencias]()
 
 # Solución Proyecto Final
@@ -46,7 +46,7 @@
 
 **10.** Ya ha iniciado la máquina correctamente muestra un mensaje bienvenida como se observa en la siguiente imagen:
 
-![](imagenes/a4.jpg)
+![](imagenes/a4.png)
 
 **11.** Allí se selecciona el idioma Español y damos click en el botón Instalar Ubuntu.
 
@@ -54,17 +54,17 @@
 
 **13.** En el Tipo de instalación damos click en la opción Borrar disco e instalar Ubuntu, como se muestra en la siguiente imagen. Esto se hace cuando se hará un reset completo del sistema o se va a instalar por primera vez, como en este caso.
 
-![](imagenes/a5.jpg)
+![](imagenes/a5.png)
 
 **14.** Una vez se han seleccionado las opciones según nuestra preferencia de uso. Llegamos al paso de la creación de Usuario del Sistema. En este caso, mi usuario tiene el nombre operativos. Luego, se agrega la contraseña de usuario y comenzará la instalción del sistema.
 
 **15.** Cuando la instalación ha finalizado correctamente se muestra el siguiente mensaje:
 
-![](imagenes/a6.jpg)
+![](imagenes/a6.png)
 
 **16.** Finalmente, ya hemos instalado correctamente el sistema Ubuntu 16.04.4 LTS (xenial) y para usarlo debemos ingresar la contraseña del usuario operativos, como lo muestra la imagen:
 
-![](imagenes/a7.jpg)
+![](imagenes/a7.png)
 
 **17.** Una vez ingresamos al sistema, abrimos la consola Terminal para realizar la configuración de conexiones ssh.
 
