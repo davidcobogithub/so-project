@@ -60,11 +60,11 @@
 
 **15.** Cuando la instalación ha finalizado correctamente se muestra el siguiente mensaje:
 
-![](imagenes/a6.png)
+![](imagenes/a6.PNG)
 
 **16.** Finalmente, ya hemos instalado correctamente el sistema Ubuntu 16.04.4 LTS (xenial) y para usarlo debemos ingresar la contraseña del usuario operativos, como lo muestra la imagen:
 
-![](imagenes/a7.png)
+![](imagenes/a7.PNG)
 
 **17.** Una vez ingresamos al sistema, abrimos la consola Terminal para realizar la configuración de conexiones ssh.
 
