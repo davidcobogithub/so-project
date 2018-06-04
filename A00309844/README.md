@@ -8,16 +8,16 @@
 
 **Tabla de Contenido**
 
-  - [1. Aprovisionamiento básico de máquina virtual con Ubuntu 16.04.4 LTS (xenial)]()
-  - [2. Instalación de LXC/LXD con permisos para el usuario]()
-  	- [2.1. Storage Pool]()
-	  - [2.2. ZFS y sus ventajas]()
-  - [3. Creación de contenedores con servicio web]()
-  - [4. Creación de contenedor con servicio de balanceo de carga]()
-  - [5. Pruebas del funcionamiento del balanceador de carga]()
-  - [6. Configuración para permitir el acceso desde el sistema anfitrión al contenedor con el servicio para balanceo de carga]()
-  - [7. Preguntas Opcionales]()
-  - [8. Referencias]()
+  - [1. Aprovisionamiento básico de máquina virtual con Ubuntu 16.04.4 LTS (xenial)](#1-aprovisionamiento-básico-de-máquina-virtual-con-ubuntu-16044-lts-xenial)
+  - [2. Instalación de LXC/LXD con permisos para el usuario](#2-instalación-de-lxclxd-con-permisos-para-el-usuario)
+  	- [2.1. Storage Pool](#21-storage-pool)
+	- [2.2. ZFS y sus ventajas](#22-zfs-y-sus-ventajas)
+  - [3. Creación de contenedores con servicio web](#3-creación-de-contenedores-con-servicio-web)
+  - [4. Creación de contenedor con servicio de balanceo de carga](#4-creación-de-contenedor-con-servicio-de-balanceo-de-carga)
+  - [5. Pruebas del funcionamiento del balanceador de carga](#5-pruebas-del-funcionamiento-del-balanceador-de-carga)
+  - [6. Configuración para permitir el acceso desde el sistema anfitrión al contenedor con el servicio para balanceo de carga](#6-configuración-para-permitir-el-acceso-desde-el-sistema-anfitrión-al-contenedor-con-el-servicio-para-balanceo-de-carga)
+  - [7. Preguntas Opcionales](#7-preguntas-opcionales)
+  - [8. Referencias](#8-referencias)
 
 # Solución Proyecto Final
 
@@ -101,11 +101,11 @@ LXD es un complemento que adiciona características sobre LXC tales como una int
 
 ![](imagenes/c1.jpg)
 
-## 2.1 Storage Pool.
+## 2.1 Storage Pool
 
-Un storage pool o grupo de almacenamiento es un entorno de almacenamiento compartido que trabaja como un solo sistema en general. Pueden configurarse en diferentes tamaños y proporcionar una serie de beneficios, que incluyen mejoras de rendimiento, administración y proteccion de datos. Las agrupaciones pueden aprovisionarse para incluir cualquier cantidad de capacidad y utilizar cualquier combinación de espacio de almacenamiento físico en una red de area de almacenamiento(SAN). En entornos de servidor virtual, las máquinas virtuales se pueden almacenar en grupos dedicados, lo que garantiza que las máquinas virtuales críticas tengan acceso a la cantidad adecuada de almacenamiento.
+Un storage pool o grupo de almacenamiento es un entorno de almacenamiento compartido que trabaja como un solo sistema en general. Pueden configurarse en diferentes tamaños y proporcionar una serie de beneficios, que incluyen mejoras de rendimiento, administración y proteccion de datos. Las agrupaciones pueden aprovisionarse para incluir cualquier cantidad de capacidad y utilizar cualquier combinación de espacio de almacenamiento físico en una red de area de almacenamiento (SAN). En entornos de servidor virtual, las máquinas virtuales se pueden almacenar en grupos dedicados, lo que garantiza que las máquinas virtuales críticas tengan acceso a la cantidad adecuada de almacenamiento.
 
-## 2.2 ZFS y sus ventajas.
+## 2.2 ZFS y sus ventajas
 
 ZFS es un sistema de archivos de código abierto creado por Sun Microsystem que provee sistemas contra pérdida y corrupción de datos, logrando proteger la información del sistema. Además, ayuda a gestionar el contenido que se almacena en disco en un formato propio con un esquema de direccionamiento de 128 bits y puede almacenar hasta 275 mil millones de TeraBytes por grupo de almacenamiento.
 
@@ -153,9 +153,17 @@ Sus principales ventajas son:
 
 **2.** Si es la primera vez que se crea un contenedor web, se va a realizar la descarga de la imagen de ubuntu 16.04 xenial.
 
-**3.** Luego, debemos ingresar a cada contenedor para configurar el servidor web, con el comando ```lxc exec websvr1 -- sudo --login --user root```
+**3.** Luego, debemos ingresar a cada contenedor para configurar el servidor web, con el comando:
 
-**4.** Una vez ingresamos al servidor web 1, instalamos Nginx para la configuración del servidor web con el comando ```sudo apt-get install nginx```
+```
+lxc exec websvr1 -- sudo --login --user root
+```
+
+**4.** Una vez ingresamos al servidor web 1, instalamos Nginx para la configuración del servidor web con el comando:
+
+```
+sudo apt-get install nginx
+```
 
 **5.** En caso de no poderse realizar por primer vez la instalación de Nginx, debemos realizar una actualización del sistema con el comando ```sudo apt-get update```. Como se ve en la imagen:
 
@@ -177,7 +185,14 @@ Sus principales ventajas son:
 
 **13.** De igual manera, ingresamos al código de la página web para el webserver2 y para el balanceador de carga y modificamos el texto para diferenciar las páginas de cada contenedor.
 
-**14.** Salimos del contenedor en el que estámos y validamos que los servicios web están activos con los comandos ```sudo systemctl enable lxd``` y ```sudo systemctl start lxd```
+**14.** Salimos del contenedor en el que estámos y validamos que los servicios web están activos con los comandos:
+
+```
+sudo systemctl enable lxd
+
+sudo systemctl start lxd
+
+```
 
 **15.** También podemos ver la descripción de cada contenedor web con el comando ```lxc list```, y nos dara el resultado como se ve en la siguiente imagen:
 
@@ -199,7 +214,7 @@ lxc config set websrv2 limits.cpu 1 		(Para el servidor web 2)
 
 **1.** Previamente, ya habíamos creado, ingresado e instalado Nginx en el balanceador de carga. 
 
-**2.** Posteriormente, realizamos la configuración del balanceador de carga, creando un archivo vacío de configuración con el comando ```sudo vi /etc/nginx/conf.d/load-balancer.conf```
+**2.** Posteriormente, realizamos la configuración del balanceador de carga, creando un archivo vacío de configuración con el comando ```sudo nano /etc/nginx/conf.d/load-balancer.conf```
 
 **3.** Dentro del archivo creado ingresaremos la siguiente configuración:
 
@@ -235,7 +250,12 @@ server {
 
 ![](imagenes/d4.jpg)
 
-**7.** Finalmente, salimos del balanceador de carga y ya podemos realizar peticiones por medio del comando ```curl http://10.3.251.14/``` como respuesta de cada uno de los servicios web a través del balanceador de carga. La ip es la del balanceador y cada ejecución muestra la página de cada servidor web, como se muestra en la siguiente imagen:
+**7.** Finalmente, salimos del balanceador de carga y ya podemos realizar peticiones por medio del comando:
+
+```
+curl http://10.3.251.14/
+``` 
+como respuesta de cada uno de los servicios web a través del balanceador de carga. La ip es la del balanceador y cada ejecución muestra la página de cada servidor web, como se muestra en la siguiente imagen:
 
 ![](imagenes/d7.jpg)
 
@@ -247,7 +267,11 @@ server {
 
 ## 5. Pruebas del funcionamiento del balanceador de carga
 
-**1.** Instalamos la herramienta Siege para realizar pruebas de estrés a los servicios web con el comando ```sudo apt-get install siege```
+**1.** Instalamos la herramienta Siege para realizar pruebas de estrés a los servicios web con el comando:
+
+```
+sudo apt-get install siege
+```
 
 **2.** Una vez se ha instalado correctamente la herramienta siege, cambiamos el porcentaje de CPU y de memoria RAM con los siguientes comandos:
 
@@ -258,7 +282,12 @@ lxc config set webserver# limits.memory ?MB
 Siendo '?' el número de porcentaje a ser asignado
 ```
 
-**3.** Para ejecutar las pruebas con los porcentajes previamente definidos utilizamos el comando ```sudo siege -c 100 -t 10s http://10.3.251.14/```, en la que el número 100 se refiere a la cantidad de clientes y el número 10 se refiere al tiempo de ejecución de la prueba antes de dar el resultado. La ip definida es la del balanceador de carga.
+**3.** Para ejecutar las pruebas con los porcentajes previamente definidos utilizamos el comando:
+
+```
+sudo siege -c 100 -t 10s http://10.3.251.14/
+```
+en la que el número 100 se refiere a la cantidad de clientes y el número 10 se refiere al tiempo de ejecución de la prueba antes de dar el resultado. La ip definida es la del balanceador de carga.
 
 **4.** Pruebas para la CPU al 50% y RAM a 64MB:
 
